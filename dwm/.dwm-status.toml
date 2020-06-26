@@ -1,0 +1,26 @@
+debug = false
+order = ["backlight", "battery", "time"]
+separator = "    "
+
+[battery]
+charging = "▲"
+discharging = "▼"
+enable_notifier = true
+no_battery = "NO BATT"
+notifier_critical = 10
+notifier_levels = [2, 5, 10, 15, 20]
+separator = " · "
+icons = []
+
+[time]
+format = "%a %Y-%m-%d %H:%M"
+update_seconds = false
+
+[cpu_load]
+template = "{CL1} {CL5} {CL15}"
+update_interval = 20
+
+[backlight]
+device = "intel_backlight"
+template = " L {BL}%"
+icons = []
