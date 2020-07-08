@@ -1,8 +1,8 @@
 ! special
-!*.foreground:   #dbd7d1
-!*.background:   #222222
-*.background:   #ffffff
-*.foreground:   #222222
+*.foreground:   #dbd7d1
+*.background:   #222222
+!*.background:   #ffffff
+!*.foreground:   #222222
 *.cursorColor:  #dbd7d1
 
 ! black
