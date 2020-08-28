@@ -55,3 +55,5 @@
 (package! org-trello)
 (package! flatui-theme)
 (package! rainbow-mode)
+(package! exwm)
+(package! gpastel)

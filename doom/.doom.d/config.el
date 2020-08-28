@@ -24,7 +24,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-snazzy)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -83,9 +83,21 @@
 
 (map!
  "C-c c" 'org-capture
+ "s-C" 'kill-buffer-and-window
+ "s-h" 'evil-window-left
+ "s-k" 'evil-window-up
+ "s-j" 'evil-window-down
+ "s-l" 'evil-window-right
+ "s-<return>" '+vterm/here
+ "s-p" (lambda
+  (command)
+  (interactive
+   (list
+    (read-shell-command "$ ")))
+  (start-process-shell-command command nil command))
 
  :leader
- "pe" 'projectile-run-eshell
+ "pe" 'projectile-run-vterm
  "bb" 'switch-to-buffer
  "." (lambda () (interactive) (dired "."))
  "oc" 'calendar
@@ -95,6 +107,8 @@
  "ow" (lambda () (interactive) (find-file "~/org/work.org")))
 
 (map! :map org-mode-map :n "t" 'org-todo)
+
+(global-set-key (kbd "s-SPC") doom-leader-map)
 
 (after! persp-mode
   (setq persp-emacsclient-init-frame-behaviour-override "main"))
@@ -123,4 +137,41 @@
 
 (add-hook 'org-capture-after-finalize-hook 'my-org-capture-cleanup)
 
+(require 'exwm)
+(require 'exwm-config)
+(exwm-config-default)
+(push ?\s-\  exwm-input-prefix-keys)
+(push ?\s-C exwm-input-prefix-keys)
+(push ?\s-h exwm-input-prefix-keys)
+(push ?\s-j exwm-input-prefix-keys)
+(push ?\s-k exwm-input-prefix-keys)
+(push ?\s-l exwm-input-prefix-keys)
+
+(exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
+
+(defun my/exwm-counsel-yank-pop ()
+  "Same as `counsel-yank-pop' and paste into exwm buffer."
+  (interactive)
+  (let ((inhibit-read-only t)
+        ;; Make sure we send selected yank-pop candidate to
+        ;; clipboard:
+        (yank-pop-change-selection t))
+    (call-interactively #'counsel-yank-pop))
+  (when (derived-mode-p 'exwm-mode)
+    ;; https://github.com/ch11ng/exwm/issues/413#issuecomment-386858496
+    (exwm-input--set-focus (exwm--buffer->id (window-buffer (selected-window))))
+    (exwm-input--fake-key ?\C-v)))
+
 ;; (require 'org-drill)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (gpastel))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
