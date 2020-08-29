@@ -68,17 +68,21 @@
   (setq org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "FOLLOWUP(f)" "WAITING(w)" "INACTIVE(i)" "STARTED(s)" "DELEGATED(D@)" "REVIEW(r)" "|" "CANCELLED(c)" "DONE(d)")))
   (org-babel-do-load-languages 'org-babel-load-languages '((ledger . t)))
   (setq org-capture-templates
-        '(("p" "Templates for projects")
-          ("pt" "Project-local todo" entry  ; {project-root}/todo.org
+        '(("P" "Templates for projects")
+          ("Pt" "Project-local todo" entry  ; {project-root}/todo.org
            (file+headline +org-capture-project-todo-file "Inbox")
            "* TODO %?\n%i\n%a" :prepend t)
-          ("pn" "Project-local notes" entry  ; {project-root}/notes.org
+          ("Pn" "Project-local notes" entry  ; {project-root}/notes.org
            (file+headline +org-capture-project-notes-file "Inbox")
            "* %U %?\n%i\n%a" :prepend t)
-          ("pc" "Project-local changelog" entry  ; {project-root}/changelog.org
+          ("Pc" "Project-local changelog" entry  ; {project-root}/changelog.org
            (file+headline +org-capture-project-changelog-file "Unreleased")
            "* %U %?\n%i\n%a" :prepend t)
-          ("t" "Rockwood Office TODO" entry (file "~/org/office.org")
+          ("b" "Personal bookmark" entry (file "~/org/personal.org")
+           "* TODO %?")
+          ("p" "Phone call" entry (file+headline "~/org/work.org" "Tasks")
+           "* TODO %? :PHONE:")
+          ("t" "Rockwood TODO" entry (file+headline "~/org/office.org" "Tasks")
            "* TODO %?"))))
 
 (map!
