@@ -112,6 +112,7 @@
  "ow" (lambda () (interactive) (find-file "~/org/work.org")))
 
 (map! :map org-mode-map :n "t" 'org-todo)
+(map! :map org-agenda-mode-map "C-l" 'org-agenda-log-mode)
 
 (global-set-key (kbd "s-SPC") doom-leader-map)
 
