@@ -108,6 +108,7 @@
  "o~" (lambda () (interactive (dired "~")))
  "op" (lambda () (interactive (dired "~/projects")))
  "oD" (lambda () (interactive (dired "~/rockwood/development")))
+ "od" (lambda () (interactive (dired "~/.dotfiles")))
  "ow" (lambda () (interactive) (find-file "~/org/work.org")))
 
 (map! :map org-mode-map :n "t" 'org-todo)
