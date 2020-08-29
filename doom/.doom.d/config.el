@@ -152,6 +152,15 @@
 (push ?\s-j exwm-input-prefix-keys)
 (push ?\s-k exwm-input-prefix-keys)
 (push ?\s-l exwm-input-prefix-keys)
+(push ?\M-1 exwm-input-prefix-keys)
+(push ?\M-2 exwm-input-prefix-keys)
+(push ?\M-3 exwm-input-prefix-keys)
+(push ?\M-4 exwm-input-prefix-keys)
+(push ?\M-5 exwm-input-prefix-keys)
+(push ?\M-6 exwm-input-prefix-keys)
+(push ?\M-7 exwm-input-prefix-keys)
+(push ?\M-8 exwm-input-prefix-keys)
+(push ?\M-9 exwm-input-prefix-keys)
 
 (exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
 
