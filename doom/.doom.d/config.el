@@ -165,6 +165,7 @@
 (exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
 
 (display-time)
+(global-auto-revert-mode)
 
 (defun my/exwm-counsel-yank-pop ()
   "Same as `counsel-yank-pop' and paste into exwm buffer."
