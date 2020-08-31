@@ -82,6 +82,8 @@
            "* TODO %?")
           ("t" "Work TODO" entry (file+headline "~/org/work.org" "Tasks")
            "* TODO %?")
+          ("T" "Work TODO (clocked)" entry (file+headline "~/org/work.org" "Tasks")
+           "* DONE %?" :clock-in t :clock-resume t)
           ("p" "Phone call" entry (file+headline "~/org/work.org" "Tasks")
            "* TODO %? :PHONE:"))))
 
@@ -114,7 +116,7 @@
 (map! :map org-mode-map :n "t" 'org-todo)
 (map! :map org-agenda-mode-map "C-l" 'org-agenda-log-mode)
 
-(global-set-key (kbd "s-SPC") doom-leader-map)
+(global-set-key (kbd "M-SPC") doom-leader-map)
 
 (after! persp-mode
   (setq persp-emacsclient-init-frame-behaviour-override "main"))
@@ -146,7 +148,7 @@
 (require 'exwm)
 (require 'exwm-config)
 (exwm-config-default)
-(push ?\s-\  exwm-input-prefix-keys)
+(push ?\M-\  exwm-input-prefix-keys)
 (push ?\s-C exwm-input-prefix-keys)
 (push ?\s-h exwm-input-prefix-keys)
 (push ?\s-j exwm-input-prefix-keys)
@@ -185,3 +187,15 @@
 (let ((device-specific-config "~/.doom.d/device.el"))
   (when (file-exists-p device-specific-config)
     (load-file device-specific-config)))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (gpastel))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
