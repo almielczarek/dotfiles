@@ -80,10 +80,10 @@
            "* %U %?\n%i\n%a" :prepend t)
           ("b" "Personal bookmark" entry (file "~/org/personal.org")
            "* TODO %?")
+          ("t" "Work TODO" entry (file+headline "~/org/work.org" "Tasks")
+           "* TODO %?")
           ("p" "Phone call" entry (file+headline "~/org/work.org" "Tasks")
-           "* TODO %? :PHONE:")
-          ("t" "Rockwood TODO" entry (file+headline "~/org/office.org" "Tasks")
-           "* TODO %?"))))
+           "* TODO %? :PHONE:"))))
 
 (map!
  "C-c c" 'org-capture
