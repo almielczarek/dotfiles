@@ -66,7 +66,7 @@
   (setq org-agenda-files '("~/org/work.org" "~/org/personal.org"))
   (setq org-tags-column -80)
   (setq org-log-done 'time)
-  (setq org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "FOLLOWUP(f)" "WAITING(w)" "INACTIVE(i)" "STARTED(s)" "DELEGATED(D@)" "REVIEW(r)" "|" "CANCELLED(c)" "DONE(d)")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "FOLLOWUP(f)" "WAITING(w)" "INACTIVE(i)" "STARTED(s)" "DELEGATED(D@)" "REPEATING(r)" "|" "CANCELLED(c)" "DONE(d)")))
   (org-babel-do-load-languages 'org-babel-load-languages '((ledger . t)))
   (setq org-capture-templates
         '(("P" "Templates for projects")
