@@ -62,6 +62,7 @@
 (add-hook 'web-mode-hook 'web-hook)
 
 (after! org
+  (add-to-list 'org-modules 'org-habit)
   (setq org-agenda-files '("~/org/work.org" "~/org/personal.org"))
   (setq org-tags-column -80)
   (setq org-log-done 'time)
