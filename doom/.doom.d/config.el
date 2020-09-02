@@ -104,6 +104,7 @@
   (start-process-shell-command command nil command))
 
  :leader
+ "f$" (lambda () (interactive (async-shell-command "miniserve -u .")))
  "pe" 'projectile-run-vterm
  "bb" 'switch-to-buffer
  "." (lambda () (interactive) (dired "."))
