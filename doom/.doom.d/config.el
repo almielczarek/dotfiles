@@ -172,6 +172,7 @@
 (push ?\M-7 exwm-input-prefix-keys)
 (push ?\M-8 exwm-input-prefix-keys)
 (push ?\M-9 exwm-input-prefix-keys)
+(push ?\M-B exwm-input-prefix-keys)
 
 (exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
 (exwm-input-set-key (kbd "M-SPC") doom-leader-map)
@@ -179,8 +180,7 @@
 (display-time)
 (global-auto-revert-mode)
 
-(org-agenda-list)
-(switch-to-buffer "*Org Agenda*")
+(setq initial-buffer-choice "~/org/work.org")
 
 (defun my/exwm-counsel-yank-pop ()
   "Same as `counsel-yank-pop' and paste into exwm buffer."
