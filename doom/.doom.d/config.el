@@ -176,6 +176,9 @@
 (display-time)
 (global-auto-revert-mode)
 
+(org-agenda-list)
+(switch-to-buffer "*Org Agenda*")
+
 (defun my/exwm-counsel-yank-pop ()
   "Same as `counsel-yank-pop' and paste into exwm buffer."
   (interactive)
