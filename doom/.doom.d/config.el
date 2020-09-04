@@ -63,6 +63,7 @@
 
 (after! org
   (add-to-list 'org-modules 'org-habit)
+  (add-to-list 'org-modules 'org-drill)
   (setq org-agenda-files '("~/org/work.org" "~/org/personal.org"))
   (setq org-tags-column -80)
   (setq org-log-done 'time)
@@ -187,7 +188,6 @@
     (exwm-input--set-focus (exwm--buffer->id (window-buffer (selected-window))))
     (exwm-input--fake-key ?\C-v)))
 
-;; (require 'org-drill)
 
 (let ((device-specific-config "~/.doom.d/device.el"))
   (when (file-exists-p device-specific-config)
