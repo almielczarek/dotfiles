@@ -118,8 +118,6 @@
 (map! :map org-mode-map :n "t" 'org-todo)
 (map! :map org-agenda-mode-map "C-l" 'org-agenda-log-mode)
 
-(global-set-key (kbd "M-SPC") doom-leader-map)
-
 (after! persp-mode
   (setq persp-emacsclient-init-frame-behaviour-override "main"))
 
@@ -150,7 +148,11 @@
 (require 'exwm)
 (require 'exwm-config)
 (exwm-config-default)
-(push ?\M-\  exwm-input-prefix-keys)
+
+(setq exwm-input-global-keys
+      `(([?\s-r] . exwm-reset)))
+
+(push ?\C-g exwm-input-prefix-keys)
 (push ?\s-C exwm-input-prefix-keys)
 (push ?\s-h exwm-input-prefix-keys)
 (push ?\s-j exwm-input-prefix-keys)
@@ -167,6 +169,7 @@
 (push ?\M-9 exwm-input-prefix-keys)
 
 (exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
+(exwm-input-set-key (kbd "M-SPC") doom-leader-map)
 
 (display-time)
 (global-auto-revert-mode)
