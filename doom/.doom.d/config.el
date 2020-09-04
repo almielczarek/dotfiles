@@ -93,6 +93,7 @@
            "* TODO %? :PHONE:"))))
 
 (map!
+ "M-B" '+ivy/switch-buffer
  "C-c c" 'org-capture
  "s-C" 'kill-buffer-and-window
  "s-h" 'evil-window-left
