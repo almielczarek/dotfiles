@@ -106,12 +106,6 @@
  "s-j" 'evil-window-down
  "s-l" 'evil-window-right
  "s-<return>" '+vterm/here
- "s-p" (lambda
-  (command)
-  (interactive
-   (list
-    (read-shell-command "$ ")))
-  (start-process-shell-command command nil command))
 
  :leader
  "f$" (lambda () (interactive (async-shell-command "miniserve -u .")))
