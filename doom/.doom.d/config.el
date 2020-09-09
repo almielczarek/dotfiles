@@ -91,6 +91,11 @@
            "* DONE %?" :clock-in t :clock-resume t)
           ("p" "Phone call" entry (file+headline "~/org/work.org" "Tasks")
            "* TODO %? :PHONE:"))))
+(defun counsel-shell (command)
+  (interactive
+   (list
+    (read-shell-command "$ ")))
+  (start-process-shell-command command nil command))
 
 (map!
  "M-B" '+ivy/switch-buffer
@@ -161,7 +166,7 @@
 (ivy-posframe-mode 1)
 
 (setq exwm-input-global-keys
-      `(([?\s-r] . exwm-reset)))
+      `(([?\s-r] . exwm-input-toggle-keyboard) ([?\M-x] . counsel-M-x) ([?\s-p] . counsel-shell)))
 
 (push ?\C-g exwm-input-prefix-keys)
 (push ?\s-C exwm-input-prefix-keys)
