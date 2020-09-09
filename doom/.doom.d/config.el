@@ -154,6 +154,12 @@
 (require 'exwm-config)
 (exwm-config-default)
 
+(require 'ivy-posframe)
+;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
+(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+(setq ivy-posframe-parameters '((parent-frame nil)))
+(ivy-posframe-mode 1)
+
 (setq exwm-input-global-keys
       `(([?\s-r] . exwm-reset)))
 

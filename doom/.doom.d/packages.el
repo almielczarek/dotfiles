@@ -57,3 +57,4 @@
 (package! rainbow-mode)
 (package! exwm)
 (package! gpastel)
+(package! ivy-posframe)
