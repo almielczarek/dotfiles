@@ -90,7 +90,8 @@
           ("T" "Work TODO (clocked)" entry (file+headline "~/org/work.org" "Tasks")
            "* DONE %?" :clock-in t :clock-resume t)
           ("p" "Phone call" entry (file+headline "~/org/work.org" "Tasks")
-           "* TODO %? :PHONE:"))))
+           "* TODO %? :PHONE:" :clock-in t :clock-resume t))))
+
 (defun counsel-shell (command)
   (interactive
    (list
