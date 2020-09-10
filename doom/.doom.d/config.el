@@ -102,10 +102,6 @@
  "M-B" '+ivy/switch-buffer
  "C-c c" 'org-capture
  "s-C" 'kill-buffer-and-window
- "s-h" 'evil-window-left
- "s-k" 'evil-window-up
- "s-j" 'evil-window-down
- "s-l" 'evil-window-right
  "s-<return>" '+vterm/here
 
  :leader
