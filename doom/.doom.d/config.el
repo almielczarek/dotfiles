@@ -161,14 +161,9 @@
 (ivy-posframe-mode 1)
 
 (setq exwm-input-global-keys
-      `(([?\s-r] . exwm-input-toggle-keyboard) ([?\M-x] . counsel-M-x) ([?\s-p] . counsel-shell)))
+      `(([?\s-r] . exwm-input-toggle-keyboard) ([?\M-x] . counsel-M-x) ([?\s-p] . counsel-shell) ([?\s-h] . evil-window-left) ([?\s-k] . evil-window-up) ([?\s-j] . evil-window-down) ([?\s-l] . evil-window-right)))
 
 (push ?\C-g exwm-input-prefix-keys)
-(push ?\s-C exwm-input-prefix-keys)
-(push ?\s-h exwm-input-prefix-keys)
-(push ?\s-j exwm-input-prefix-keys)
-(push ?\s-k exwm-input-prefix-keys)
-(push ?\s-l exwm-input-prefix-keys)
 (push ?\M-1 exwm-input-prefix-keys)
 (push ?\M-2 exwm-input-prefix-keys)
 (push ?\M-3 exwm-input-prefix-keys)
