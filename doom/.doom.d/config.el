@@ -99,6 +99,10 @@
     (read-shell-command "$ ")))
   (start-process-shell-command command nil command))
 
+(evil-set-initial-state 'vterm-mode 'emacs)
+
+(add-hook 'vterm-mode-hook #'doom-modeline-mode)
+
 (map!
  "M-B" '+ivy/switch-buffer
  "C-c c" 'org-capture
