@@ -182,8 +182,6 @@
 (display-time)
 (global-auto-revert-mode)
 
-(setq initial-buffer-choice "~/org/work.org")
-
 (defun my/exwm-counsel-yank-pop ()
   "Same as `counsel-yank-pop' and paste into exwm buffer."
   (interactive)
