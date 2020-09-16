@@ -175,6 +175,7 @@
 (push ?\M-B exwm-input-prefix-keys)
 
 (exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
+(exwm-input-set-key (kbd "M-Y") '+pass/copy-secret)
 (exwm-input-set-key (kbd "M-SPC") doom-leader-map)
 
 (setq display-time-day-and-date t)
