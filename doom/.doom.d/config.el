@@ -107,6 +107,7 @@
  "s-<return>" '+vterm/here
 
  :leader
+ "oA" (lambda () (interactive (org-agenda nil "a")))
  "f$" (lambda () (interactive (async-shell-command "miniserve -u .")))
  "pe" 'projectile-run-vterm
  "bb" 'switch-to-buffer
