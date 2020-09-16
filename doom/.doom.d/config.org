@@ -19,6 +19,9 @@
 #+BEGIN_SRC emacs-lisp
 (setq org-directory "~/org/")
 
+(map! :map org-mode-map :n "t" 'org-todo)
+(map! :map org-agenda-mode-map "C-l" 'org-agenda-log-mode)
+
 (after! org
   (add-to-list 'org-modules 'org-habit)
   (add-to-list 'org-modules 'org-drill)
@@ -68,14 +71,8 @@
           (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
 #+END_SRC
 
-* Bindings
+* Global bindings
 #+BEGIN_SRC emacs-lisp
-(defun counsel-shell (command)
-  (interactive
-   (list
-    (read-shell-command "$ ")))
-  (start-process-shell-command command nil command))
-
 (map!
  "M-B" '+ivy/switch-buffer
  "C-c c" 'org-capture
@@ -94,9 +91,13 @@
  "oD" (lambda () (interactive (dired "~/rockwood/development")))
  "od" (lambda () (interactive (dired "~/.dotfiles")))
  "ow" (lambda () (interactive) (find-file "~/org/work.org")))
+#+END_SRC
 
-(map! :map org-mode-map :n "t" 'org-todo)
-(map! :map org-agenda-mode-map "C-l" 'org-agenda-log-mode)
+* EXWM
+#+BEGIN_SRC emacs-lisp
+(require 'exwm)
+(require 'exwm-config)
+(exwm-config-default)
 
 (setq exwm-input-global-keys
       `(([?\s-r] . exwm-input-toggle-keyboard) ([?\M-x] . counsel-M-x) ([?\s-p] . counsel-shell) ([?\s-h] . evil-window-left) ([?\s-k] . evil-window-up) ([?\s-j] . evil-window-down) ([?\s-l] . evil-window-right)))
@@ -112,6 +113,16 @@
 (push ?\M-9 exwm-input-prefix-keys)
 (push ?\M-B exwm-input-prefix-keys)
 
+(exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
+(exwm-input-set-key (kbd "M-Y") '+pass/copy-secret)
+(exwm-input-set-key (kbd "M-SPC") doom-leader-map)
+
+(defun counsel-shell (command)
+  (interactive
+   (list
+    (read-shell-command "$ ")))
+
+  (start-process-shell-command command nil command))
 (defun my/exwm-counsel-yank-pop ()
   "Same as `counsel-yank-pop' and paste into exwm buffer."
   (interactive)
@@ -124,17 +135,6 @@
     ;; https://github.com/ch11ng/exwm/issues/413#issuecomment-386858496
     (exwm-input--set-focus (exwm--buffer->id (window-buffer (selected-window))))
     (exwm-input--fake-key ?\C-v)))
-
-(exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
-(exwm-input-set-key (kbd "M-Y") '+pass/copy-secret)
-(exwm-input-set-key (kbd "M-SPC") doom-leader-map)
-#+END_SRC
-
-* EXWM
-#+BEGIN_SRC emacs-lisp
-(require 'exwm)
-(require 'exwm-config)
-(exwm-config-default)
 #+END_SRC
 
 * Misc
