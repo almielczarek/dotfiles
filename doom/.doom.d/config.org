@@ -83,7 +83,7 @@
  "oA" (lambda () (interactive (org-agenda nil "a")))
  "f$" (lambda () (interactive (async-shell-command "miniserve -u .")))
  "pe" 'projectile-run-vterm
- "bb" 'switch-to-buffer
+ "bb" '+ivy/switch-buffer
  "." (lambda () (interactive) (dired "."))
  "oc" 'calendar
  "o~" (lambda () (interactive (dired "~")))
@@ -121,8 +121,8 @@
   (interactive
    (list
     (read-shell-command "$ ")))
-
   (start-process-shell-command command nil command))
+
 (defun my/exwm-counsel-yank-pop ()
   "Same as `counsel-yank-pop' and paste into exwm buffer."
   (interactive)
@@ -142,6 +142,7 @@
 (setq user-full-name "Alexander Mielczarek"
       user-mail-address "almielczarek@gmail.com")
 
+(map! :map ibuffer-mode-map :n "r" 'ibuffer-update)
 (global-auto-revert-mode)
 
 (let ((device-specific-config "~/.doom.d/device.el"))
