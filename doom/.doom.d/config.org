@@ -82,6 +82,8 @@
  "M-]" 'next-buffer
 
  :leader
+ "RET" '+ivy/switch-buffer
+ "M-RET" '+ivy/switch-buffer
  "oA" (lambda () (interactive (org-agenda nil "a")))
  "f$" (lambda () (interactive (async-shell-command "miniserve -u .")))
  "pe" 'projectile-run-vterm
