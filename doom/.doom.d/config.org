@@ -83,6 +83,7 @@
  :leader
  "RET" '+ivy/switch-buffer
  "M-RET" '+ivy/switch-buffer
+ "l" (lambda () (interactive) (start-process-shell-command "slock" nil "slock"))
  "oA" (lambda () (interactive (org-agenda nil "a")))
  "f$" (lambda () (interactive (async-shell-command "miniserve -u .")))
  "pe" 'projectile-run-vterm
