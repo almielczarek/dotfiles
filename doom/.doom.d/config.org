@@ -101,6 +101,8 @@
 (require 'exwm-config)
 (exwm-config-default)
 
+(setq exwm-manage-configurations '(((string= exwm-instance-name "xfreerdp") char-mode t)))
+
 (setq exwm-input-global-keys
       `(([?\s-r] . exwm-input-toggle-keyboard) ([?\M-x] . counsel-M-x) ([?\s-p] . counsel-shell) ([?\s-h] . evil-window-left) ([?\s-k] . evil-window-up) ([?\s-j] . evil-window-down) ([?\s-l] . evil-window-right)))
 (push ?\C-g exwm-input-prefix-keys)
