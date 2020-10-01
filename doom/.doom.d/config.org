@@ -79,6 +79,28 @@
  "s-<return>" '+vterm/here
  "M-[" 'previous-buffer
  "M-]" 'next-buffer
+ "s-<tab> TAB" #'+workspace/display
+ "s-<tab> ." #'+workspace/switch-to
+ "s-<tab> `" #'+workspace/other
+ "s-<tab> n" #'+workspace/new
+ "s-<tab> l" #'+workspace/load
+ "s-<tab> s" #'+workspace/save
+ "s-<tab> x" #'+workspace/kill-session
+ "s-<tab> d" #'+workspace/delete
+ "s-<tab> r" #'+workspace/rename
+ "s-<tab> R" #'+workspace/restore-last-session
+ "s-<tab> ]" #'+workspace/switch-right
+ "s-<tab> [" #'+workspace/switch-left
+ "s-<tab> 1" #'+workspace/switch-to-0
+ "s-<tab> 2" #'+workspace/switch-to-1
+ "s-<tab> 3" #'+workspace/switch-to-2
+ "s-<tab> 4" #'+workspace/switch-to-3
+ "s-<tab> 5" #'+workspace/switch-to-4
+ "s-<tab> 6" #'+workspace/switch-to-5
+ "s-<tab> 7" #'+workspace/switch-to-6
+ "s-<tab> 8" #'+workspace/switch-to-7
+ "s-<tab> 9" #'+workspace/switch-to-8
+ "s-<tab> 0" #'+workspace/switch-to-final
 
  :leader
  "RET" '+ivy/switch-buffer
