@@ -103,15 +103,18 @@
  "s-<tab> 0" #'+workspace/switch-to-final
 
  :leader
- "RET" '+ivy/switch-buffer
- "M-RET" '+ivy/switch-buffer
+ "," '+ivy/switch-buffer
+ "j" 'dad-joke
  "l" (lambda () (interactive) (start-process-shell-command "slock" nil "slock"))
  "oA" (lambda () (interactive (org-agenda nil "a")))
  "f$" (lambda () (interactive (async-shell-command "miniserve -u .")))
+ "$" '+vterm/here
+ "!" 'counsel-shell
  "pe" 'projectile-run-vterm
  "bb" '+ivy/switch-buffer
  "." (lambda () (interactive) (dired "."))
  "oc" 'calendar
+ "ob" (lambda () (interactive) (start-process-shell-command "firefox" nil "firefox"))
  "o~" (lambda () (interactive (dired "~")))
  "op" (lambda () (interactive (dired "~/projects")))
  "oD" (lambda () (interactive (dired "~/rockwood/development")))
@@ -169,6 +172,9 @@
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Alexander Mielczarek"
       user-mail-address "almielczarek@gmail.com")
+(setq +workspaces-on-switch-project-behavior t)
+
+(setq +workspaces-switch-project-function 'dired)
 
 (map! :map ibuffer-mode-map :n "r" 'ibuffer-update)
 (global-auto-revert-mode)
