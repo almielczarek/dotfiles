@@ -128,6 +128,8 @@
 (require 'exwm-config)
 (exwm-config-default)
 
+(add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
+
 (setq exwm-manage-configurations '(((string= exwm-instance-name "xfreerdp") char-mode t)))
 
 (setq exwm-input-global-keys
@@ -143,6 +145,8 @@
 (push ?\M-8 exwm-input-prefix-keys)
 (push ?\M-9 exwm-input-prefix-keys)
 (push ?\M-B exwm-input-prefix-keys)
+(push ?\M-\[ exwm-input-prefix-keys)
+(push ?\M-\] exwm-input-prefix-keys)
 
 (exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
 (exwm-input-set-key (kbd "M-Y") '+pass/copy-secret)
