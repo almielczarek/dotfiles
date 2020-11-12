@@ -115,7 +115,7 @@
  "." (lambda () (interactive) (dired "."))
  "ot" '+vterm/here
  "oc" 'calendar
- "ob" (lambda () (interactive) (start-process-shell-command "firefox" nil "firefox"))
+ "ob" (lambda () (interactive) (start-process-shell-command "qutebrowser" nil "qutebrowser"))
  "oi" (lambda () (interactive) (start-process-shell-command "inkscape" nil "inkscape"))
  "o~" (lambda () (interactive (dired "~")))
  "op" (lambda () (interactive (dired "~/projects")))
