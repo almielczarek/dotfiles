@@ -181,7 +181,9 @@
 
 (setq +workspaces-switch-project-function 'dired)
 
-(map! :map ibuffer-mode-map :n "r" 'ibuffer-update)
+(after! ibuffer
+  (map! :map ibuffer-mode-map :n "r" #'ibuffer-update))
+
 (global-auto-revert-mode)
 
 (let ((device-specific-config "~/.doom.d/device.el"))
