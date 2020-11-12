@@ -111,7 +111,6 @@
  "$" '+vterm/here
  "!" 'counsel-shell
  "pe" 'projectile-run-vterm
- ;; "bb" '+ivy/switch-buffer
  "." (lambda () (interactive) (dired "."))
  "ot" '+vterm/here
  "oc" 'calendar
