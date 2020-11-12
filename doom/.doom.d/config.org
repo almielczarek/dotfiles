@@ -1,7 +1,7 @@
 * UI
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "Source Code Pro" :size 14))
-(setq doom-theme 'doom-city-lights)
+(setq doom-theme 'doom-nord)
 (setq display-line-numbers-type t)
 
 (evil-set-initial-state 'vterm-mode 'emacs)
