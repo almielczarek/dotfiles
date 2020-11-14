@@ -14,10 +14,6 @@
 (remove-hook 'vterm-mode-hook 'hide-mode-line-mode)
 (evil-set-initial-state 'vterm-mode 'emacs)
 
-(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-(setq ivy-posframe-parameters '((parent-frame nil)))
-(ivy-posframe-mode 1)
-
 (setq display-time-day-and-date t)
 (display-time)
 #+END_SRC
