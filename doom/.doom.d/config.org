@@ -9,6 +9,8 @@
 (spaceline-spacemacs-theme)
 (spaceline-toggle-minor-modes-off)
 (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+(fringe-mode '2)
+
 (remove-hook 'vterm-mode-hook 'hide-mode-line-mode)
 (evil-set-initial-state 'vterm-mode 'emacs)
 
