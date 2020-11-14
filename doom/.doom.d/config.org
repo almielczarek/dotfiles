@@ -8,8 +8,8 @@
 (spaceline-spacemacs-theme)
 (spaceline-toggle-minor-modes-off)
 (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+(remove-hook 'vterm-mode-hook 'hide-mode-line-mode)
 (evil-set-initial-state 'vterm-mode 'emacs)
-(add-hook 'vterm-mode-hook #'doom-modeline-mode)
 
 (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
 (setq ivy-posframe-parameters '((parent-frame nil)))
