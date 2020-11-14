@@ -4,6 +4,10 @@
 (setq doom-theme 'doom-nord)
 (setq display-line-numbers-type t)
 
+(require 'spaceline-config)
+(spaceline-spacemacs-theme)
+(spaceline-toggle-minor-modes-off)
+(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
 (evil-set-initial-state 'vterm-mode 'emacs)
 (add-hook 'vterm-mode-hook #'doom-modeline-mode)
 

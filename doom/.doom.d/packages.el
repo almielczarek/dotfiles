@@ -57,4 +57,6 @@
 (package! rainbow-mode)
 (package! exwm)
 (package! gpastel)
-(package! ivy-posframe)
+(package! spaceline)
+(package! fancy-battery)
+(package! anzu)
