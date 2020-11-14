@@ -2,6 +2,7 @@
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "Source Code Pro" :size 14))
 (setq doom-theme 'doom-nord)
+(setq doom-nord-brighter-modeline t)
 (setq display-line-numbers-type t)
 
 (require 'spaceline-config)
