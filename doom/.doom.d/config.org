@@ -195,7 +195,7 @@
       user-mail-address "almielczarek@gmail.com")
 (setq +workspaces-on-switch-project-behavior t)
 
-(setq +workspaces-switch-project-function 'dired)
+(setq +workspaces-switch-project-function 'counsel-find-file)
 
 (after! ibuffer
   (map! :map ibuffer-mode-map :n "r" #'ibuffer-update))
