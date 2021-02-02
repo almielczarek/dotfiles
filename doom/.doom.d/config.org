@@ -17,6 +17,8 @@
 
 (remove-hook 'vterm-mode-hook 'hide-mode-line-mode)
 (evil-set-initial-state 'vterm-mode 'emacs)
+(after! persp-mode
+(setq persp-emacsclient-init-frame-behaviour-override "main"))
 
 (setq which-key-idle-delay 0.3)
 
@@ -78,6 +80,8 @@
 #+BEGIN_SRC emacs-lisp
 (add-hook 'elixir-mode-hook
           (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+
+;; (map! :map elixir-mode-map :nv "m" alchemist-mode-keymap)
 #+END_SRC
 
 * Global bindings
@@ -140,7 +144,9 @@
 
 (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
-(setq exwm-manage-configurations '(((string= exwm-instance-name "xfreerdp") char-mode t)))
+(setq exwm-manage-configurations '(((string= exwm-instance-name "xfreerdp") char-mode t)
+                                   ((string= exwm-instance-name "qutebrowser") char-mode t)
+                                   ((string= exwm-instance-name "org.inkscape.Inkscape") char-mode t)))
 
 (setq exwm-input-global-keys
       `(
