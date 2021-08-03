@@ -1,12 +1,13 @@
 * UI
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "Source Code Pro" :size 14))
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-moonlight)
 (setq doom-nord-brighter-modeline t)
+;; (setq doom-plain-brighter-modeline t)
 (setq display-line-numbers-type t)
 
-(set-frame-parameter (selected-frame) 'alpha '(90 90))
-(add-to-list 'default-frame-alist '(alpha 90 90))
+;; (set-frame-parameter (selected-frame) 'alpha '(90 90))
+;; (add-to-list 'default-frame-alist '(alpha 90 90))
 
 (require 'spaceline-config)
 (setq powerline-default-separator 'slant)
@@ -36,7 +37,7 @@
 (after! org
   (add-to-list 'org-modules 'org-habit)
   (add-to-list 'org-modules 'org-drill)
-  (setq org-agenda-files '("~/org/work.org" "~/org/personal.org"))
+  (setq org-agenda-files '("~/org/work" "~/org/work/projects" "~/org/work/areas" "~/org/work/archive"))
   (setq org-tags-column -80)
   (setq org-log-done 'time)
   (setq org-startup-folded t)
@@ -55,11 +56,11 @@
            "* %U %?\n%i\n%a" :prepend t)
           ("b" "Personal bookmark" entry (file "~/org/personal.org")
            "* TODO %?")
-          ("t" "Work TODO" entry (file+headline "~/org/work.org" "Tasks")
+          ("t" "Work TODO" entry (file+headline "~/org/work/index.org" "Incoming")
            "* TODO %?")
-          ("T" "Work TODO (clocked)" entry (file+headline "~/org/work.org" "Tasks")
-           "* DONE %?" :clock-in t :clock-resume t)
-          ("p" "Phone call" entry (file+headline "~/org/work.org" "Tasks")
+          ("T" "Work TODO (clocked)" entry (file+headline "~/org/work/index.org" "Incoming")
+           "* STARTED %?" :clock-in t :clock-resume t)
+          ("p" "Phone call" entry (file+headline "~/org/work/index.org" "Incoming")
            "* TODO %? :PHONE:" :clock-in t :clock-resume t))))
 #+END_SRC
 
@@ -122,18 +123,20 @@
  "oA" (lambda () (interactive (org-agenda nil "a")))
  "f$" (lambda () (interactive (async-shell-command "miniserve -u .")))
  "$" '+vterm/here
+ "%" 'calc
  "!" 'counsel-shell
  "pe" 'projectile-run-vterm
  "." (lambda () (interactive) (dired "."))
  "ot" '+vterm/here
  "oc" 'calendar
  "ob" (lambda () (interactive) (start-process-shell-command "firefox" nil "firefox"))
+ "oe" (lambda () (interactive) (start-process-shell-command "firefox https://rockwoodproducts.com/events" nil "firefox https://rockwoodproducts.com/events"))
  "oi" (lambda () (interactive) (start-process-shell-command "inkscape" nil "inkscape"))
  "o~" (lambda () (interactive (dired "~")))
  "op" (lambda () (interactive (dired "~/projects")))
  "oD" (lambda () (interactive (dired "~/rockwood/development")))
  "od" (lambda () (interactive (dired "~/.dotfiles")))
- "ow" (lambda () (interactive) (find-file "~/org/work.org")))
+ "ow" (lambda () (interactive) (find-file "~/org/work/index.org")))
 #+END_SRC
 
 * EXWM

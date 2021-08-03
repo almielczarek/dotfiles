@@ -25,6 +25,12 @@ zall () {
   pdfunite *.pdf(n) /dev/stdout | zathura -
 }
 
+pdf2svgopt () {
+    parallel -j 8 inkscape -o {.}.svg {} ::: $@
+    parallel -j 8 svgo -o {.}.svg -o {.}-opt.svg ::: $@
+    parallel -j 8 sed -i "s/stroke-width=\".*\"/stroke-width=\"1\"/g" {.}-opt.svg ::: $@
+}
+
 alias frequency="cpupower frequency-info"
 alias powersave="sudo cpupower frequency-set -g powersave"
 alias performance="sudo cpupower frequency-set -g performance"
