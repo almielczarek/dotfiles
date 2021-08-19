@@ -27,8 +27,9 @@ zall () {
 
 pdf2svgopt () {
     parallel -j 8 inkscape -o {.}.svg {} ::: $@
-    parallel -j 8 svgo -o {.}.svg -o {.}-opt.svg ::: $@
-    parallel -j 8 sed -i "s/stroke-width=\".*\"/stroke-width=\"1\"/g" {.}-opt.svg ::: $@
+    parallel -j 8 svgo -i {.}.svg -o {.}-opt.svg ::: $@
+    # parallel -j 8 sed -i "s/stroke-width=\".*\"/stroke-width=\"1\"/g" {.}-opt.svg ::: $@
+    parallel -j 8 mv {.}-opt.svg {.}.svg ::: $@
 }
 
 alias frequency="cpupower frequency-info"
