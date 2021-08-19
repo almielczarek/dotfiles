@@ -1,7 +1,7 @@
 * UI
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "Source Code Pro" :size 14))
-(setq doom-theme 'doom-moonlight)
+(setq doom-theme 'doom-spacegrey)
 (setq doom-nord-brighter-modeline t)
 ;; (setq doom-plain-brighter-modeline t)
 (setq display-line-numbers-type t)
@@ -38,6 +38,7 @@
   (add-to-list 'org-modules 'org-habit)
   (add-to-list 'org-modules 'org-drill)
   (setq org-agenda-files '("~/org/work" "~/org/work/projects" "~/org/work/areas" "~/org/work/archive"))
+  (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :fileskip0 t :stepskip0 t))
   (setq org-tags-column -80)
   (setq org-log-done 'time)
   (setq org-startup-folded t)
@@ -63,7 +64,11 @@
           ("p" "Phone call" entry (file+headline "~/org/work/index.org" "Incoming")
            "* TODO %? :PHONE:" :clock-in t :clock-resume t))))
 #+END_SRC
-
+* Org roam
+#+BEGIN_SRC emacs-lisp
+(setq org-roam-directory "~/org/roam")
+(setq org-roam-v2-ack t)
+#+END_SRC
 * Web mode
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'auto-mode-alist '("\\.leex\\'" . web-mode))
@@ -93,30 +98,31 @@
  "s-<return>" '+vterm/here
  "M-[" 'previous-buffer
  "M-]" 'next-buffer
- "s-<tab> TAB" #'+workspace/display
- "s-<tab> ." #'+workspace/switch-to
- "s-<tab> `" #'+workspace/other
- "s-<tab> n" #'+workspace/new
- "s-<tab> l" #'+workspace/load
- "s-<tab> s" #'+workspace/save
- "s-<tab> x" #'+workspace/kill-session
- "s-<tab> d" #'+workspace/delete
- "s-<tab> r" #'+workspace/rename
- "s-<tab> R" #'+workspace/restore-last-session
- "s-<tab> ]" #'+workspace/switch-right
- "s-<tab> [" #'+workspace/switch-left
- "s-<tab> 1" #'+workspace/switch-to-0
- "s-<tab> 2" #'+workspace/switch-to-1
- "s-<tab> 3" #'+workspace/switch-to-2
- "s-<tab> 4" #'+workspace/switch-to-3
- "s-<tab> 5" #'+workspace/switch-to-4
- "s-<tab> 6" #'+workspace/switch-to-5
- "s-<tab> 7" #'+workspace/switch-to-6
- "s-<tab> 8" #'+workspace/switch-to-7
- "s-<tab> 9" #'+workspace/switch-to-8
- "s-<tab> 0" #'+workspace/switch-to-final
 
  :leader
+ "--" #'+workspace/display
+ "-." #'+workspace/switch-to
+ "-`" #'+workspace/other
+ "-n" #'+workspace/new
+ "-l" #'+workspace/load
+ "-s" #'+workspace/save
+ "-x" #'+workspace/kill-session
+ "-d" #'+workspace/delete
+ "-r" #'+workspace/rename
+ "-R" #'+workspace/restore-last-session
+ "-]" #'+workspace/switch-right
+ "-[" #'+workspace/switch-left
+ "-1" #'+workspace/switch-to-0
+ "-2" #'+workspace/switch-to-1
+ "-3" #'+workspace/switch-to-2
+ "-4" #'+workspace/switch-to-3
+ "-5" #'+workspace/switch-to-4
+ "-6" #'+workspace/switch-to-5
+ "-7" #'+workspace/switch-to-6
+ "-8" #'+workspace/switch-to-7
+ "-9" #'+workspace/switch-to-8
+ "-0" #'+workspace/switch-to-final
+
  "," '+ivy/switch-workspace-buffer
  "j" 'dad-joke
  "l" (lambda () (interactive) (start-process-shell-command "slock" nil "slock"))
@@ -148,6 +154,7 @@
 (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
 (setq exwm-manage-configurations '(((string= exwm-instance-name "xfreerdp") char-mode t)
+                                   ((string= exwm-instance-name "Firefox") char-mode t)
                                    ((string= exwm-instance-name "qutebrowser") char-mode t)
                                    ((string= exwm-instance-name "org.inkscape.Inkscape") char-mode t)))
 
@@ -197,7 +204,19 @@
     (exwm-input--set-focus (exwm--buffer->id (window-buffer (selected-window))))
     (exwm-input--fake-key ?\C-v)))
 #+END_SRC
+* Dired
+#+BEGIN_SRC emacs-lisp
+(defun dired-open ()
+  (interactive)
+  (setq file (dired-get-file-for-visit))
+  (setq ext (file-name-extension file))
+  (cond ((string= ext "pdf")
+         (start-process-shell-command "zathura" nil (concat "zathura " (shell-quote-argument file))))
+        (t (dired-find-file))))
 
+
+(map! :map dired-mode-map :nv "RET" 'dired-open)
+#+END_SRC
 * Misc
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Alexander Mielczarek"
