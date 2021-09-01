@@ -1,7 +1,7 @@
 * UI
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "Source Code Pro" :size 14))
-(setq doom-theme 'doom-spacegrey)
+(setq doom-theme 'doom-tomorrow-day)
 (setq doom-nord-brighter-modeline t)
 ;; (setq doom-plain-brighter-modeline t)
 (setq display-line-numbers-type t)
@@ -14,7 +14,7 @@
 (spaceline-spacemacs-theme)
 (spaceline-toggle-minor-modes-off)
 (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-(fringe-mode '2)
+(fringe-mode '3)
 
 (remove-hook 'vterm-mode-hook 'hide-mode-line-mode)
 (evil-set-initial-state 'vterm-mode 'emacs)
@@ -140,9 +140,8 @@
  "oi" (lambda () (interactive) (start-process-shell-command "inkscape" nil "inkscape"))
  "o~" (lambda () (interactive (dired "~")))
  "op" (lambda () (interactive (dired "~/projects")))
- "oD" (lambda () (interactive (dired "~/rockwood/development")))
- "od" (lambda () (interactive (dired "~/.dotfiles")))
- "ow" (lambda () (interactive) (find-file "~/org/work/index.org")))
+ "ow" (lambda () (interactive) (find-file "~/org/work/index.org"))
+ "r" 'org-roam-node-find)
 #+END_SRC
 
 * EXWM
@@ -211,7 +210,13 @@
   (setq file (dired-get-file-for-visit))
   (setq ext (file-name-extension file))
   (cond ((string= ext "pdf")
-         (start-process-shell-command "zathura" nil (concat "zathura " (shell-quote-argument file))))
+          (start-process-shell-command "zathura" nil (concat "zathura " (shell-quote-argument file))))
+        ((string= ext "dxf")
+          (start-process-shell-command "librecad" nil (concat "librecad " (shell-quote-argument file))))
+        ((string= ext "html")
+          (start-process-shell-command "firefox" nil (concat "firefox " (shell-quote-argument file))))
+        ((string= ext "svg")
+          (start-process-shell-command "inkscape" nil (concat "inkscape " (shell-quote-argument file))))
         (t (dired-find-file))))
 
 
