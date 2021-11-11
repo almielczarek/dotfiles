@@ -51,6 +51,8 @@
 ;(package! builtin-package :recipe (:branch "develop"))
 
 (package! dad-joke)
+(package! calfw)
+(package! calfw-org)
 (package! org-drill)
 (package! org-trello)
 (package! flatui-theme)

@@ -39,6 +39,7 @@
   (add-to-list 'org-modules 'org-drill)
   (setq org-agenda-files '("~/org/work" "~/org/work/projects" "~/org/work/areas" "~/org/work/archive"))
   (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :fileskip0 t :stepskip0 t))
+  (setq org-agenda-skip-scheduled-if-done t)
   (setq org-tags-column -80)
   (setq org-log-done 'time)
   (setq org-startup-folded t)
@@ -95,7 +96,7 @@
 (map!
  "C-c c" 'org-capture
  "s-C" 'kill-buffer-and-window
- "s-<return>" '+vterm/here
+ "s-<return>" (lambda () (interactive) (start-process-shell-command "st" nil "st"))
  "M-[" 'previous-buffer
  "M-]" 'next-buffer
 
@@ -128,12 +129,12 @@
  "l" (lambda () (interactive) (start-process-shell-command "slock" nil "slock"))
  "oA" (lambda () (interactive (org-agenda nil "a")))
  "f$" (lambda () (interactive (async-shell-command "miniserve -u .")))
- "$" '+vterm/here
+ "$" (lambda () (interactive) (start-process-shell-command "st" nil "st"))
  "%" 'calc
  "!" 'counsel-shell
  "pe" 'projectile-run-vterm
  "." (lambda () (interactive) (dired "."))
- "ot" '+vterm/here
+ "ot" (lambda () (interactive) (start-process-shell-command "st" nil "st"))
  "oc" 'calendar
  "ob" (lambda () (interactive) (start-process-shell-command "firefox" nil "firefox"))
  "oe" (lambda () (interactive) (start-process-shell-command "firefox https://rockwoodproducts.com/events" nil "firefox https://rockwoodproducts.com/events"))
@@ -152,10 +153,11 @@
 
 (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
-(setq exwm-manage-configurations '(((string= exwm-instance-name "xfreerdp") char-mode t)
-                                   ((string= exwm-instance-name "Firefox") char-mode t)
-                                   ((string= exwm-instance-name "qutebrowser") char-mode t)
-                                   ((string= exwm-instance-name "org.inkscape.Inkscape") char-mode t)))
+(setq exwm-manage-configurations '(((string= exwm-class-name "xfreerdp") char-mode t)
+                                   ((string= exwm-class-name "Firefox") char-mode t)
+                                   ((string= exwm-class-name "qutebrowser") char-mode t)
+                                   ((string= exwm-class-name "St") char-mode t)
+                                   ((string= exwm-class-name "org.inkscape.Inkscape") char-mode t)))
 
 (setq exwm-input-global-keys
       `(
