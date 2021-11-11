@@ -9,6 +9,8 @@
 ;; (set-frame-parameter (selected-frame) 'alpha '(90 90))
 ;; (add-to-list 'default-frame-alist '(alpha 90 90))
 
+(add-to-list 'display-buffer-alist '("*Async Shell Command*" display-buffer-no-window (nil)))
+
 (require 'spaceline-config)
 (setq powerline-default-separator 'slant)
 (spaceline-spacemacs-theme)
@@ -213,6 +215,12 @@
   (setq ext (file-name-extension file))
   (cond ((string= ext "pdf")
           (start-process-shell-command "zathura" nil (concat "zathura " (shell-quote-argument file))))
+        ((string= ext "jpg")
+          (start-process-shell-command "sxiv" nil (concat "sxiv " (shell-quote-argument file))))
+        ((string= ext "jpeg")
+          (start-process-shell-command "sxiv" nil (concat "sxiv " (shell-quote-argument file))))
+        ((string= ext "png")
+          (start-process-shell-command "sxiv" nil (concat "sxiv " (shell-quote-argument file))))
         ((string= ext "dxf")
           (start-process-shell-command "librecad" nil (concat "librecad " (shell-quote-argument file))))
         ((string= ext "html")
@@ -220,7 +228,6 @@
         ((string= ext "svg")
           (start-process-shell-command "inkscape" nil (concat "inkscape " (shell-quote-argument file))))
         (t (dired-find-file))))
-
 
 (map! :map dired-mode-map :nv "RET" 'dired-open)
 #+END_SRC
