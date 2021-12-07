@@ -138,8 +138,8 @@
  "." (lambda () (interactive) (dired "."))
  "ot" (lambda () (interactive) (start-process-shell-command "st" nil "st"))
  "oc" 'calendar
- "ob" (lambda () (interactive) (start-process-shell-command "firefox" nil "firefox"))
- "oe" (lambda () (interactive) (start-process-shell-command "firefox https://rockwoodproducts.com/events" nil "firefox https://rockwoodproducts.com/events"))
+ "ob" (lambda () (interactive) (start-process-shell-command "qutebrowser" nil "qutebrowser"))
+ "oe" (lambda () (interactive) (start-process-shell-command "qutebrowser https://rockwoodproducts.com/events" nil "qutebrowser https://rockwoodproducts.com/events"))
  "oi" (lambda () (interactive) (start-process-shell-command "inkscape" nil "inkscape"))
  "o~" (lambda () (interactive (dired "~")))
  "op" (lambda () (interactive (dired "~/projects")))
@@ -156,9 +156,10 @@
 (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
 (setq exwm-manage-configurations '(((string= exwm-class-name "xfreerdp") char-mode t)
-                                   ((string= exwm-class-name "Firefox") char-mode t)
+                                   ((string= exwm-class-name "Qutebrowser") char-mode t)
                                    ((string= exwm-class-name "qutebrowser") char-mode t)
                                    ((string= exwm-class-name "St") char-mode t)
+                                   ((string= exwm-class-name "st-256color") char-mode t)
                                    ((string= exwm-class-name "org.inkscape.Inkscape") char-mode t)))
 
 (setq exwm-input-global-keys
@@ -224,7 +225,7 @@
         ((string= ext "dxf")
           (start-process-shell-command "librecad" nil (concat "librecad " (shell-quote-argument file))))
         ((string= ext "html")
-          (start-process-shell-command "firefox" nil (concat "firefox " (shell-quote-argument file))))
+          (start-process-shell-command "qutebrowser" nil (concat "qutebrowser " (shell-quote-argument file))))
         ((string= ext "svg")
           (start-process-shell-command "inkscape" nil (concat "inkscape " (shell-quote-argument file))))
         (t (dired-find-file))))
