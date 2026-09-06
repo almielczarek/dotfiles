@@ -1,7 +1,7 @@
 * UI
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "Source Code Pro" :size 14))
-(setq doom-theme 'doom-tomorrow-day)
+(setq doom-theme 'doom-nord-light)
 (setq doom-nord-brighter-modeline t)
 ;; (setq doom-plain-brighter-modeline t)
 (setq display-line-numbers-type t)
@@ -31,7 +31,7 @@
 
 * Org mode
 #+BEGIN_SRC emacs-lisp
-(setq org-directory "~/org/")
+(setq org-directory "~/sync/")
 
 (map! :map org-mode-map :n "t" 'org-todo)
 (map! :map org-agenda-mode-map "C-l" 'org-agenda-log-mode)
@@ -39,7 +39,7 @@
 (after! org
   (add-to-list 'org-modules 'org-habit)
   (add-to-list 'org-modules 'org-drill)
-  (setq org-agenda-files '("~/org/work" "~/org/work/projects" "~/org/work/areas" "~/org/work/archive"))
+  (setq org-agenda-files '("~/sync/work" "~/sync/work/projects" "~/sync/work/areas" "~/sync/work/archive"))
   (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :fileskip0 t :stepskip0 t))
   (setq org-agenda-skip-scheduled-if-done t)
   (setq org-tags-column -80)
@@ -58,18 +58,18 @@
           ("Pc" "Project-local changelog" entry  ; {project-root}/changelog.org
            (file+headline +org-capture-project-changelog-file "Unreleased")
            "* %U %?\n%i\n%a" :prepend t)
-          ("b" "Personal bookmark" entry (file "~/org/personal.org")
+          ("b" "Personal bookmark" entry (file "~/sync/personal.org")
            "* TODO %?")
-          ("t" "Work TODO" entry (file+headline "~/org/work/index.org" "Incoming")
+          ("t" "Work TODO" entry (file+headline "~/sync/work/index.org" "Incoming")
            "* TODO %?")
-          ("T" "Work TODO (clocked)" entry (file+headline "~/org/work/index.org" "Incoming")
+          ("T" "Work TODO (clocked)" entry (file+headline "~/sync/work/index.org" "Incoming")
            "* STARTED %?" :clock-in t :clock-resume t)
-          ("p" "Phone call" entry (file+headline "~/org/work/index.org" "Incoming")
+          ("p" "Phone call" entry (file+headline "~/sync/work/index.org" "Incoming")
            "* TODO %? :PHONE:" :clock-in t :clock-resume t))))
 #+END_SRC
 * Org roam
 #+BEGIN_SRC emacs-lisp
-(setq org-roam-directory "~/org/roam")
+(setq org-roam-directory "~/sync/roam")
 (setq org-roam-v2-ack t)
 #+END_SRC
 * Web mode
@@ -135,25 +135,26 @@
  "%" 'calc
  "!" 'counsel-shell
  "pe" 'projectile-run-vterm
+ "ot" '+vterm/here
  "." (lambda () (interactive) (dired "."))
- "ot" (lambda () (interactive) (start-process-shell-command "st" nil "st"))
  "oc" 'calendar
  "ob" (lambda () (interactive) (start-process-shell-command "qutebrowser" nil "qutebrowser"))
  "oe" (lambda () (interactive) (start-process-shell-command "qutebrowser https://rockwoodproducts.com/events" nil "qutebrowser https://rockwoodproducts.com/events"))
  "oi" (lambda () (interactive) (start-process-shell-command "inkscape" nil "inkscape"))
  "o~" (lambda () (interactive (dired "~")))
  "op" (lambda () (interactive (dired "~/projects")))
- "ow" (lambda () (interactive) (find-file "~/org/work/index.org"))
+ "ow" (lambda () (interactive) (find-file "~/sync/work/index.org"))
+ "os" (lambda () (interactive) (find-file "~/sync/school/index.org"))
  "r" 'org-roam-node-find)
 #+END_SRC
 
 * EXWM
 #+BEGIN_SRC emacs-lisp
-(require 'exwm)
-(require 'exwm-config)
-(exwm-config-default)
+; (require 'exwm)
+; (require 'exwm-config)
+; (exwm-config-default)
 
-(add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
+; (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
 (setq exwm-manage-configurations '(((string= exwm-class-name "xfreerdp") char-mode t)
                                    ((string= exwm-class-name "Qutebrowser") char-mode t)
@@ -162,32 +163,32 @@
                                    ((string= exwm-class-name "st-256color") char-mode t)
                                    ((string= exwm-class-name "org.inkscape.Inkscape") char-mode t)))
 
-(setq exwm-input-global-keys
-      `(
-        ([?\s-r] . exwm-input-toggle-keyboard)
-        ([?\M-x] . counsel-M-x)
-        ([?\s-p] . counsel-shell)
-        ([?\s-h] . evil-window-left)
-        ([?\s-k] . evil-window-up)
-        ([?\s-j] . evil-window-down)
-        ([?\s-l] . evil-window-right)
-        ([?\M-\[] . previous-buffer)
-        ([?\M-\]] . next-buffer)
-        ([?\M-1] . +workspace/switch-to-0)
-        ([?\M-2] . +workspace/switch-to-1)
-        ([?\M-3] . +workspace/switch-to-2)
-        ([?\M-4] . +workspace/switch-to-3)
-        ([?\M-5] . +workspace/switch-to-4)
-        ([?\M-6] . +workspace/switch-to-5)
-        ([?\M-7] . +workspace/switch-to-6)
-        ([?\M-8] . +workspace/switch-to-7)
-        ([?\M-9] . +workspace/switch-to-8)))
+; (setq exwm-input-global-keys
+      ; `(
+        ; ([?\s-r] . exwm-input-toggle-keyboard)
+        ; ([?\M-x] . counsel-M-x)
+        ; ([?\s-p] . counsel-shell)
+        ; ([?\s-h] . evil-window-left)
+        ; ([?\s-k] . evil-window-up)
+        ; ([?\s-j] . evil-window-down)
+        ; ([?\s-l] . evil-window-right)
+        ; ([?\M-\[] . previous-buffer)
+        ; ([?\M-\]] . next-buffer)
+        ; ([?\M-1] . +workspace/switch-to-0)
+        ; ([?\M-2] . +workspace/switch-to-1)
+        ; ([?\M-3] . +workspace/switch-to-2)
+        ; ([?\M-4] . +workspace/switch-to-3)
+        ; ([?\M-5] . +workspace/switch-to-4)
+        ; ([?\M-6] . +workspace/switch-to-5)
+        ; ([?\M-7] . +workspace/switch-to-6)
+        ; ([?\M-8] . +workspace/switch-to-7)
+        ; ([?\M-9] . +workspace/switch-to-8)))
 
-(push ?\C-g exwm-input-prefix-keys)
+; (push ?\C-g exwm-input-prefix-keys)
 
-(exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
-(exwm-input-set-key (kbd "M-Y") '+pass/copy-secret)
-(exwm-input-set-key (kbd "M-SPC") doom-leader-map)
+; (exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
+; (exwm-input-set-key (kbd "M-Y") '+pass/copy-secret)
+; (exwm-input-set-key (kbd "M-SPC") doom-leader-map)
 
 (defun counsel-shell (command)
   (interactive
@@ -195,18 +196,18 @@
     (read-shell-command "$ ")))
   (start-process-shell-command command nil command))
 
-(defun my/exwm-counsel-yank-pop ()
-  "Same as `counsel-yank-pop' and paste into exwm buffer."
-  (interactive)
-  (let ((inhibit-read-only t)
-        ;; Make sure we send selected yank-pop candidate to
-        ;; clipboard:
-        (yank-pop-change-selection t))
-    (call-interactively #'counsel-yank-pop))
-  (when (derived-mode-p 'exwm-mode)
-    ;; https://github.com/ch11ng/exwm/issues/413#issuecomment-386858496
-    (exwm-input--set-focus (exwm--buffer->id (window-buffer (selected-window))))
-    (exwm-input--fake-key ?\C-v)))
+; (defun my/exwm-counsel-yank-pop ()
+  ; "Same as `counsel-yank-pop' and paste into exwm buffer."
+  ; (interactive)
+  ; (let ((inhibit-read-only t)
+        ; ;; Make sure we send selected yank-pop candidate to
+        ; ;; clipboard:
+        ; (yank-pop-change-selection t))
+    ; (call-interactively #'counsel-yank-pop))
+  ; (when (derived-mode-p 'exwm-mode)
+    ; ;; https://github.com/ch11ng/exwm/issues/413#issuecomment-386858496
+    ; (exwm-input--set-focus (exwm--buffer->id (window-buffer (selected-window))))
+    ; (exwm-input--fake-key ?\C-v)))
 #+END_SRC
 * Dired
 #+BEGIN_SRC emacs-lisp
