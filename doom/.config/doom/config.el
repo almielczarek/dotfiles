@@ -88,8 +88,8 @@
  "C-c c" 'org-capture
  "s-C" 'kill-buffer-and-window
  "s-<return>" (lambda () (interactive) (start-process-shell-command "st" nil "st"))
- "M-[" 'previous-buffer
- "M-]" 'next-buffer
+ ;"M-[" 'previous-buffer
+ ;"M-]" 'next-buffer
 
  :leader
  "--" #'+workspace/display
@@ -132,68 +132,11 @@
  "oi" (lambda () (interactive) (start-process-shell-command "inkscape" nil "inkscape"))
  "o~" (lambda () (interactive (dired "~")))
  "op" (lambda () (interactive (dired "~/projects")))
- "ow" (lambda () (interactive) (find-file "~/sync/work/index.org"))
- "os" (lambda () (interactive) (find-file "~/sync/school/index.org"))
+ "ow" (lambda () (interactive) (find-file "~/org/work/index.org"))
  "r" 'org-roam-node-find)
 
-; (require 'exwm)
-; (require 'exwm-config)
-; (exwm-config-default)
-
-; (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
-
-(setq exwm-manage-configurations '(((string= exwm-class-name "xfreerdp") char-mode t)
-                                   ((string= exwm-class-name "Qutebrowser") char-mode t)
-                                   ((string= exwm-class-name "qutebrowser") char-mode t)
-                                   ((string= exwm-class-name "St") char-mode t)
-                                   ((string= exwm-class-name "st-256color") char-mode t)
-                                   ((string= exwm-class-name "org.inkscape.Inkscape") char-mode t)))
-
-; (setq exwm-input-global-keys
-      ; `(
-        ; ([?\s-r] . exwm-input-toggle-keyboard)
-        ; ([?\M-x] . counsel-M-x)
-        ; ([?\s-p] . counsel-shell)
-        ; ([?\s-h] . evil-window-left)
-        ; ([?\s-k] . evil-window-up)
-        ; ([?\s-j] . evil-window-down)
-        ; ([?\s-l] . evil-window-right)
-        ; ([?\M-\[] . previous-buffer)
-        ; ([?\M-\]] . next-buffer)
-        ; ([?\M-1] . +workspace/switch-to-0)
-        ; ([?\M-2] . +workspace/switch-to-1)
-        ; ([?\M-3] . +workspace/switch-to-2)
-        ; ([?\M-4] . +workspace/switch-to-3)
-        ; ([?\M-5] . +workspace/switch-to-4)
-        ; ([?\M-6] . +workspace/switch-to-5)
-        ; ([?\M-7] . +workspace/switch-to-6)
-        ; ([?\M-8] . +workspace/switch-to-7)
-        ; ([?\M-9] . +workspace/switch-to-8)))
-
-; (push ?\C-g exwm-input-prefix-keys)
-
-; (exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
-; (exwm-input-set-key (kbd "M-Y") '+pass/copy-secret)
-; (exwm-input-set-key (kbd "M-SPC") doom-leader-map)
-
-(defun counsel-shell (command)
-  (interactive
-   (list
-    (read-shell-command "$ ")))
-  (start-process-shell-command command nil command))
-
-; (defun my/exwm-counsel-yank-pop ()
-  ; "Same as `counsel-yank-pop' and paste into exwm buffer."
-  ; (interactive)
-  ; (let ((inhibit-read-only t)
-        ; ;; Make sure we send selected yank-pop candidate to
-        ; ;; clipboard:
-        ; (yank-pop-change-selection t))
-    ; (call-interactively #'counsel-yank-pop))
-  ; (when (derived-mode-p 'exwm-mode)
-    ; ;; https://github.com/ch11ng/exwm/issues/413#issuecomment-386858496
-    ; (exwm-input--set-focus (exwm--buffer->id (window-buffer (selected-window))))
-    ; (exwm-input--fake-key ?\C-v)))
+(global-unset-key (kbd "M-<TAB>"))
+(global-unset-key (kbd "M-["))
 
 (defun dired-open ()
   (interactive)
