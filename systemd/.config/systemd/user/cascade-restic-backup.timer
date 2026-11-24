@@ -1,0 +1,9 @@
+[Unit]
+Description=Daily restic backup for cascade project
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target

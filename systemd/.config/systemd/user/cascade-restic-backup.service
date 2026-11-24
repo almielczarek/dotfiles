@@ -1,0 +1,7 @@
+[Unit]
+Description=Restic backup for cascade project
+
+[Service]
+Type=oneshot
+EnvironmentFile=/home/alex/.config/restic/env-cascade
+ExecStart=/usr/bin/restic backup /home/alex/projects/cascade-project --verbose

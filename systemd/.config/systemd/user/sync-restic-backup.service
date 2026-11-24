@@ -1,0 +1,7 @@
+[Unit]
+Description=Restic backup for sync folder
+
+[Service]
+Type=oneshot
+EnvironmentFile=/home/alex/.config/restic/env-sync
+ExecStart=/usr/bin/restic backup /home/alex/sync --verbose
