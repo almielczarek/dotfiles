@@ -1,0 +1,233 @@
+(setq doom-font (font-spec :family "Source Code Pro" :size 14))
+(setq doom-theme 'doom-nord-light)
+(setq doom-nord-brighter-modeline t)
+;; (setq doom-plain-brighter-modeline t)
+(setq display-line-numbers-type t)
+
+;; (set-frame-parameter (selected-frame) 'alpha '(90 90))
+;; (add-to-list 'default-frame-alist '(alpha 90 90))
+
+(add-to-list 'display-buffer-alist '("*Async Shell Command*" display-buffer-no-window (nil)))
+
+(require 'spaceline-config)
+(setq powerline-default-separator 'slant)
+(spaceline-spacemacs-theme)
+(spaceline-toggle-minor-modes-off)
+(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+(fringe-mode '3)
+
+(remove-hook 'vterm-mode-hook 'hide-mode-line-mode)
+(evil-set-initial-state 'vterm-mode 'emacs)
+(after! persp-mode
+(setq persp-emacsclient-init-frame-behaviour-override "main"))
+
+(setq which-key-idle-delay 0.3)
+
+;;(setq scroll-conservatively 101
+      ;;scroll-margin 0
+      ;;pixel-scroll-precision-mode t)
+
+(setq display-time-day-and-date t)
+(display-time)
+
+(setq org-directory "~/sync/")
+
+(map! :map org-mode-map :n "t" 'org-todo)
+(map! :map org-agenda-mode-map "C-l" 'org-agenda-log-mode)
+
+(after! org
+  (add-to-list 'org-modules 'org-habit)
+  (add-to-list 'org-modules 'org-drill)
+  (setq org-agenda-files '("~/sync/personal"))
+  (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :fileskip0 t :stepskip0 t))
+  (setq org-agenda-skip-scheduled-if-done t)
+  (setq org-tags-column -80)
+  (setq org-log-done 'time)
+  (setq org-startup-folded t)
+  (setq org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "FOLLOWUP(f)" "WAITING(w)" "INACTIVE(i)" "STARTED(s)" "DELEGATED(D@)" "REPEATING(r)" "|" "CANCELLED(c)" "DONE(d)")))
+  (org-babel-do-load-languages 'org-babel-load-languages '((ledger . t)))
+  (setq org-capture-templates
+        '(("P" "Templates for projects")
+          ("Pt" "Project-local todo" entry  ; {project-root}/todo.org
+           (file+headline +org-capture-project-todo-file "Inbox")
+           "* TODO %?\n%i\n%a" :prepend t)
+          ("Pn" "Project-local notes" entry  ; {project-root}/notes.org
+           (file+headline +org-capture-project-notes-file "Inbox")
+           "* %U %?\n%i\n%a" :prepend t)
+          ("Pc" "Project-local changelog" entry  ; {project-root}/changelog.org
+           (file+headline +org-capture-project-changelog-file "Unreleased")
+           "* %U %?\n%i\n%a" :prepend t)
+          ("b" "Personal bookmark" entry (file "~/sync/personal.org")
+           "* TODO %?")
+          ("t" "Work TODO" entry (file+headline "~/sync/work/index.org" "Incoming")
+           "* TODO %?")
+          ("T" "Work TODO (clocked)" entry (file+headline "~/sync/work/index.org" "Incoming")
+           "* STARTED %?" :clock-in t :clock-resume t)
+          ("p" "Phone call" entry (file+headline "~/sync/work/index.org" "Incoming")
+           "* TODO %? :PHONE:" :clock-in t :clock-resume t))))
+
+(setq org-roam-directory "~/sync/roam")
+(setq org-roam-v2-ack t)
+
+(add-to-list 'auto-mode-alist '("\\.leex\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+
+(defun web-hook ()
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
+
+(add-hook 'web-mode-hook 'web-hook)
+
+(add-hook 'elixir-mode-hook
+          (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+
+;; (map! :map elixir-mode-map :nv "m" alchemist-mode-keymap)
+
+(map!
+ "C-c c" 'org-capture
+ "s-C" 'kill-buffer-and-window
+ "s-<return>" (lambda () (interactive) (start-process-shell-command "st" nil "st"))
+ "M-[" 'previous-buffer
+ "M-]" 'next-buffer
+
+ :leader
+ "--" #'+workspace/display
+ "-." #'+workspace/switch-to
+ "-`" #'+workspace/other
+ "-n" #'+workspace/new
+ "-l" #'+workspace/load
+ "-s" #'+workspace/save
+ "-x" #'+workspace/kill-session
+ "-d" #'+workspace/delete
+ "-r" #'+workspace/rename
+ "-R" #'+workspace/restore-last-session
+ "-]" #'+workspace/switch-right
+ "-[" #'+workspace/switch-left
+ "-1" #'+workspace/switch-to-0
+ "-2" #'+workspace/switch-to-1
+ "-3" #'+workspace/switch-to-2
+ "-4" #'+workspace/switch-to-3
+ "-5" #'+workspace/switch-to-4
+ "-6" #'+workspace/switch-to-5
+ "-7" #'+workspace/switch-to-6
+ "-8" #'+workspace/switch-to-7
+ "-9" #'+workspace/switch-to-8
+ "-0" #'+workspace/switch-to-final
+
+ "," '+ivy/switch-workspace-buffer
+ "j" 'dad-joke
+ "l" (lambda () (interactive) (start-process-shell-command "slock" nil "slock"))
+ "oA" (lambda () (interactive (org-agenda nil "a")))
+ "f$" (lambda () (interactive (async-shell-command "miniserve -u .")))
+ "$" (lambda () (interactive) (start-process-shell-command "st" nil "st"))
+ "%" 'calc
+ "!" 'counsel-shell
+ "pe" 'projectile-run-vterm
+ "ot" '+vterm/here
+ "." (lambda () (interactive) (dired "."))
+ "oc" 'calendar
+ "ob" (lambda () (interactive) (start-process-shell-command "qutebrowser" nil "qutebrowser"))
+ "oe" (lambda () (interactive) (start-process-shell-command "qutebrowser https://rockwoodproducts.com/events" nil "qutebrowser https://rockwoodproducts.com/events"))
+ "oi" (lambda () (interactive) (start-process-shell-command "inkscape" nil "inkscape"))
+ "o~" (lambda () (interactive (dired "~")))
+ "op" (lambda () (interactive (dired "~/projects")))
+ "ow" (lambda () (interactive) (find-file "~/sync/work/index.org"))
+ "os" (lambda () (interactive) (find-file "~/sync/school/index.org"))
+ "r" 'org-roam-node-find)
+
+; (require 'exwm)
+; (require 'exwm-config)
+; (exwm-config-default)
+
+; (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
+
+(setq exwm-manage-configurations '(((string= exwm-class-name "xfreerdp") char-mode t)
+                                   ((string= exwm-class-name "Qutebrowser") char-mode t)
+                                   ((string= exwm-class-name "qutebrowser") char-mode t)
+                                   ((string= exwm-class-name "St") char-mode t)
+                                   ((string= exwm-class-name "st-256color") char-mode t)
+                                   ((string= exwm-class-name "org.inkscape.Inkscape") char-mode t)))
+
+; (setq exwm-input-global-keys
+      ; `(
+        ; ([?\s-r] . exwm-input-toggle-keyboard)
+        ; ([?\M-x] . counsel-M-x)
+        ; ([?\s-p] . counsel-shell)
+        ; ([?\s-h] . evil-window-left)
+        ; ([?\s-k] . evil-window-up)
+        ; ([?\s-j] . evil-window-down)
+        ; ([?\s-l] . evil-window-right)
+        ; ([?\M-\[] . previous-buffer)
+        ; ([?\M-\]] . next-buffer)
+        ; ([?\M-1] . +workspace/switch-to-0)
+        ; ([?\M-2] . +workspace/switch-to-1)
+        ; ([?\M-3] . +workspace/switch-to-2)
+        ; ([?\M-4] . +workspace/switch-to-3)
+        ; ([?\M-5] . +workspace/switch-to-4)
+        ; ([?\M-6] . +workspace/switch-to-5)
+        ; ([?\M-7] . +workspace/switch-to-6)
+        ; ([?\M-8] . +workspace/switch-to-7)
+        ; ([?\M-9] . +workspace/switch-to-8)))
+
+; (push ?\C-g exwm-input-prefix-keys)
+
+; (exwm-input-set-key (kbd "M-y") #'my/exwm-counsel-yank-pop)
+; (exwm-input-set-key (kbd "M-Y") '+pass/copy-secret)
+; (exwm-input-set-key (kbd "M-SPC") doom-leader-map)
+
+(defun counsel-shell (command)
+  (interactive
+   (list
+    (read-shell-command "$ ")))
+  (start-process-shell-command command nil command))
+
+; (defun my/exwm-counsel-yank-pop ()
+  ; "Same as `counsel-yank-pop' and paste into exwm buffer."
+  ; (interactive)
+  ; (let ((inhibit-read-only t)
+        ; ;; Make sure we send selected yank-pop candidate to
+        ; ;; clipboard:
+        ; (yank-pop-change-selection t))
+    ; (call-interactively #'counsel-yank-pop))
+  ; (when (derived-mode-p 'exwm-mode)
+    ; ;; https://github.com/ch11ng/exwm/issues/413#issuecomment-386858496
+    ; (exwm-input--set-focus (exwm--buffer->id (window-buffer (selected-window))))
+    ; (exwm-input--fake-key ?\C-v)))
+
+(defun dired-open ()
+  (interactive)
+  (setq file (dired-get-file-for-visit))
+  (setq ext (file-name-extension file))
+  (cond ((string= ext "pdf")
+          (start-process-shell-command "zathura" nil (concat "zathura " (shell-quote-argument file))))
+        ((string= ext "jpg")
+          (start-process-shell-command "sxiv" nil (concat "sxiv " (shell-quote-argument file))))
+        ((string= ext "jpeg")
+          (start-process-shell-command "sxiv" nil (concat "sxiv " (shell-quote-argument file))))
+        ((string= ext "png")
+          (start-process-shell-command "sxiv" nil (concat "sxiv " (shell-quote-argument file))))
+        ((string= ext "dxf")
+          (start-process-shell-command "librecad" nil (concat "librecad " (shell-quote-argument file))))
+        ((string= ext "html")
+          (start-process-shell-command "qutebrowser" nil (concat "qutebrowser " (shell-quote-argument file))))
+        ((string= ext "svg")
+          (start-process-shell-command "inkscape" nil (concat "inkscape " (shell-quote-argument file))))
+        (t (dired-find-file))))
+
+(map! :map dired-mode-map :nv "RET" 'dired-open)
+
+(setq user-full-name "Alexander Mielczarek"
+      user-mail-address "almielczarek@gmail.com")
+(setq +workspaces-on-switch-project-behavior t)
+
+(setq +workspaces-switch-project-function 'counsel-find-file)
+
+(after! ibuffer
+  (map! :map ibuffer-mode-map :n "r" #'ibuffer-update))
+
+(global-auto-revert-mode)
+
+(let ((device-specific-config "~/.doom.d/device.el"))
+  (when (file-exists-p device-specific-config)
+    (load-file device-specific-config)))

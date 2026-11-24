@@ -25,6 +25,10 @@
 
 (setq which-key-idle-delay 0.3)
 
+;;(setq scroll-conservatively 101
+      ;;scroll-margin 0
+      ;;pixel-scroll-precision-mode t)
+
 (setq display-time-day-and-date t)
 (display-time)
 #+END_SRC
@@ -39,7 +43,7 @@
 (after! org
   (add-to-list 'org-modules 'org-habit)
   (add-to-list 'org-modules 'org-drill)
-  (setq org-agenda-files '("~/sync/work" "~/sync/work/projects" "~/sync/work/areas" "~/sync/work/archive"))
+  (setq org-agenda-files '("~/sync/personal"))
   (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :fileskip0 t :stepskip0 t))
   (setq org-agenda-skip-scheduled-if-done t)
   (setq org-tags-column -80)
