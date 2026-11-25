@@ -38,6 +38,8 @@
 (after! org
   (add-to-list 'org-modules 'org-habit)
   (add-to-list 'org-modules 'org-drill)
+  (setq org-habit-graph-column 50
+        org-habit-show-habits-only-for-today nil)
   (setq org-agenda-files '("~/sync/personal"))
   (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :fileskip0 t :stepskip0 t))
   (setq org-agenda-skip-scheduled-if-done t)
@@ -131,8 +133,8 @@
  "oe" (lambda () (interactive) (start-process-shell-command "qutebrowser https://rockwoodproducts.com/events" nil "qutebrowser https://rockwoodproducts.com/events"))
  "oi" (lambda () (interactive) (start-process-shell-command "inkscape" nil "inkscape"))
  "o~" (lambda () (interactive (dired "~")))
- "op" (lambda () (interactive (dired "~/projects")))
- "ow" (lambda () (interactive) (find-file "~/org/work/index.org"))
+ "op" (lambda () (interactive (find-file "~/sync/personal/index.org")))
+ "ow" (lambda () (interactive) (find-file "~/sync/work/index.org"))
  "r" 'org-roam-node-find)
 
 (global-unset-key (kbd "M-<TAB>"))
